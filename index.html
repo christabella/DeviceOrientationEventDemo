@@ -85,9 +85,9 @@
         var gammaElement = document.getElementById('gamma');
 
         betaElement.innerText = "DeviceOrientationEvent.beta: " + event.beta
-            + "\DeviceOrientationEvent.y: " + event.y; 
+            + "\nDeviceOrientationEvent.y: " + event.y; 
         gammaElement.innerText = "DeviceOrientationEvent.gamma: " + event.gamma
-            + "\DeviceOrientationEvent.x: " + event.x;
+            + "\nDeviceOrientationEvent.x: " + event.x;
 
         if (!initialX && !initialY) {
 
@@ -99,8 +99,8 @@
             var positionX = initialX - x;
             var positionY = initialY - y;
 
-            ball.style.top = (90 + positionX * 5) + 'px';
-            ball.style.left = (90 + positionY * 5) + 'px';
+            ball.style.top = (250 + positionX * 5) + 'px';
+            ball.style.left = (250 + positionY * 5) + 'px';
         }
     }
 
