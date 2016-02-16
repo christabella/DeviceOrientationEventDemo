@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 DeviceOrientationEventDemo</title>
+
+    <style>
+        body {
+            font-family: helvetica, sans-serif;
+        }
+
+        #canvas {
+            width: 500px;
+            height: 500px;
+
+            border: 5px solid #ddd;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+        }
+
+        #middle {
+            position: relative;
+            width: 4px;
+            height: 4px;
+            left: 230px;
+            top: 230px;
+            font-size: 40px;
+        }
+
+        #ball {
+            background-color: magenta;
+            position: relative;
+            width: 20px;
+            height: 20px;
+            left: 240px;
+            top: 240px;
+
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+        }
+
+        #warning {
+            display: none;
+            padding: 5px 10px;
+
+            border-radius: 2px;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+
+            color: white;
+            background-color: lightcoral;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<h1>DeviceOrientationEventDemo</h1>
+
+<p id="warning"></p>
+
+<p id="beta"></p>
+<p id="gamma"></p>
+
+<div id="canvas" width="500" height="500">
+    <div id="middle">&#x1F645</div>
+    <div id="ball"></div>
+</div>
+
+
+
+<script>
+
+    var initialX = null;
+    var initialY = null;
+
+    var ball = document.getElementById('ball');
+
+    function handleOrientationEvent(event) {
+
+        var x = event.beta ? event.beta : event.y * 90;
+        var y = event.gamma ? event.gamma : event.x * 90;
+
+        var betaElement = document.getElementById('beta');
+        var gammaElement = document.getElementById('gamma');
+
+        betaElement.innerText = "DeviceOrientationEvent.beta: " + event.beta;
+        gammaElement.innerText = "DeviceOrientationEvent.gamma: " + event.gamma;
+
+        if (!initialX && !initialY) {
+
+            initialX = x;
+            initialY = y;
+
+        } else {
+
+            var positionX = initialX - x;
+            var positionY = initialY - y;
+
+            ball.style.top = (90 + positionX * 5) + 'px';
+            ball.style.left = (90 + positionY * 5) + 'px';
+        }
+    }
+
+    function isEventFired() {
+        if (!initialX && !initialY) {
+            var warningElement = document.getElementById('warning');
+            warningElement.innerText = 'Warning: Cannot receive Device Orientation Events.';
+            warningElement.style.display = 'inline-block';
+        }
+    }
+
+    window.addEventListener("MozOrientation", handleOrientationEvent, true);
+    window.addEventListener("deviceorientation", handleOrientationEvent, true);
+
+    setTimeout(isEventFired, 2000);
+
+</script>
+
+
+</body>
+</html>
