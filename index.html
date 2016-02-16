@@ -84,8 +84,10 @@
         var betaElement = document.getElementById('beta');
         var gammaElement = document.getElementById('gamma');
 
-        betaElement.innerText = "DeviceOrientationEvent.beta: " + event.beta;
-        gammaElement.innerText = "DeviceOrientationEvent.gamma: " + event.gamma;
+        betaElement.innerText = "DeviceOrientationEvent.beta: " + event.beta
+            + "\DeviceOrientationEvent.y: " + event.y; 
+        gammaElement.innerText = "DeviceOrientationEvent.gamma: " + event.gamma
+            + "\DeviceOrientationEvent.x: " + event.x;
 
         if (!initialX && !initialY) {
 
